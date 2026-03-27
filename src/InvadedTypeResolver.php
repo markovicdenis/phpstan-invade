@@ -7,7 +7,6 @@ namespace MarkovicDenis\PHPStanInvade;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\Type;
-use PHPStan\Type\TypeWithClassName;
 
 final class InvadedTypeResolver
 {
@@ -24,14 +23,22 @@ final class InvadedTypeResolver
     {
         $invadedType = $this->resolveType($classReflection);
 
-        if (!$invadedType instanceof TypeWithClassName) {
+        if ($invadedType === null) {
             return null;
         }
 
-        if (!$this->reflectionProvider->hasClass($invadedType->getClassName())) {
+        $classNames = $invadedType->getObjectClassNames();
+
+        if ($classNames === []) {
             return null;
         }
 
-        return $this->reflectionProvider->getClass($invadedType->getClassName());
+        $className = $classNames[0];
+
+        if (!$this->reflectionProvider->hasClass($className)) {
+            return null;
+        }
+
+        return $this->reflectionProvider->getClass($className);
     }
 }

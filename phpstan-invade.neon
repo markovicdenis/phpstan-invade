@@ -1,5 +1,10 @@
 services:
     -
+        class: MarkovicDenis\PHPStanInvade\InvadeDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicFunctionReturnTypeExtension
+
+    -
         class: MarkovicDenis\PHPStanInvade\InvaderMethodsExtension
         tags:
             - phpstan.broker.methodsClassReflectionExtension
