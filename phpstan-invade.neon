@@ -1,0 +1,10 @@
+services:
+    -
+        class: MarkovicDenis\PHPStanInvade\InvaderMethodsExtension
+        tags:
+            - phpstan.broker.methodsClassReflectionExtension
+
+    -
+        class: MarkovicDenis\PHPStanInvade\InvaderPropertiesExtension
+        tags:
+            - phpstan.broker.propertiesClassReflectionExtension
